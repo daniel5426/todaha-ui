@@ -1,0 +1,12 @@
+/** specific css  */
+.challenge-definition-detail-component {
+  height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.challenge-definition-detail-component-separator {
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color) 0%, rgba(33, 150, 243, 0) 50%);
+}

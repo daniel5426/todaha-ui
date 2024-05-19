@@ -1,0 +1,36 @@
+{
+  "name": "referenceItem-domain",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/referenceItems/referenceItem-domain/src",
+  "prefix": "lib",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:package",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/referenceItems/referenceItem-domain/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/referenceItems/referenceItem-domain/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/referenceItems/referenceItem-domain/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/referenceItems/referenceItem-domain/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

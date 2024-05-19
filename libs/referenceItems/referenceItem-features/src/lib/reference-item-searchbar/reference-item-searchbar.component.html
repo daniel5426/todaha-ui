@@ -1,0 +1,30 @@
+<div class="p-toolbar" >
+  <div class="col p-0">
+    <div  class="p-fluid p-formgrid grid p-0">
+      <div class="col-6">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input type="text" pInputText placeholder="{{ 'KEY' | translate }}"  [(ngModel)]="query.key" (keyup.enter)="search()" />
+        </span>
+      </div>
+      <div class="col-6">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input type="text" pInputText placeholder="{{ 'VALUE' | translate }}" [(ngModel)]="query.value" (keyup.enter)="search()" />
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="col-fixed p-0" style="width:150px">
+    <div  class="p-fluid p-formgrid grid p-0">
+      <div class=" col-12">
+        <span class="p-buttonset">
+          <button (click)="search()" pButton pRipple type="button" icon="pi pi-search" class="p-mr-2"></button>
+          <button (click)="clear()" pButton pRipple type="button"  icon="pi pi-refresh"class="p-mr-2"></button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+

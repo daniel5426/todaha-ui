@@ -1,0 +1,349 @@
+openapi: 3.1.0
+info:
+  title: ReferenceItems.Services
+  version: 1.0.0
+paths:
+  /{referenceItemRoute}/{id}:
+    delete:
+      tags:
+        - DeleteEndPoint
+      parameters:
+        - name: referenceItemRoute
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    get:
+      tags:
+        - GetByIdEndPoint
+      parameters:
+        - name: referenceItemRoute
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ReferenceInternationalizedItemReaderModelContract'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferenceInternationalizedItemReaderModelContract'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ReferenceInternationalizedItemReaderModelContract'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    put:
+      tags:
+        - PutEndPoint
+      parameters:
+        - name: referenceItemRoute
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReferenceItemWriterModelContract'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ReferenceItemWriterModelContract'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ReferenceItemWriterModelContract'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ReferenceInternationalizedItemReaderModelContract'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferenceInternationalizedItemReaderModelContract'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ReferenceInternationalizedItemReaderModelContract'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+  /{referenceItemRoute}/:
+    get:
+      tags:
+        - GetAllEndPoint
+      parameters:
+        - name: referenceItemRoute
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: id
+          in: query
+          style: form
+          schema:
+            type: string
+        - name: key
+          in: query
+          style: form
+          schema:
+            type: string
+        - name: value
+          in: query
+          style: form
+          schema:
+            type: string
+        - name: page
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+            default: 1
+        - name: limit
+          in: query
+          style: form
+          schema:
+            type: integer
+            format: int32
+            default: 50
+        - name: q
+          in: query
+          style: form
+          schema:
+            type: string
+        - name: orders
+          in: query
+          style: form
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ReferenceItemReaderModelContractPagedResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferenceItemReaderModelContractPagedResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ReferenceItemReaderModelContractPagedResult'
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+    post:
+      tags:
+        - PostEndPoint
+      parameters:
+        - name: referenceItemRoute
+          in: path
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReferenceItemWriterModelContract'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ReferenceItemWriterModelContract'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ReferenceItemWriterModelContract'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ReferenceInternationalizedItemReaderModelContract'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferenceInternationalizedItemReaderModelContract'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ReferenceInternationalizedItemReaderModelContract'
+        '400':
+          description: Bad Request
+        '500':
+          description: Server Error
+components:
+  schemas:
+    InternationalizedValueModelContract:
+      required:
+        - default
+        - language
+        - value
+      type: object
+      properties:
+        language:
+          minLength: 1
+          type: string
+        value:
+          minLength: 1
+          type: string
+        default:
+          type: boolean
+      additionalProperties: false
+    Metadata:
+      type: object
+      additionalProperties: false
+    ReferenceInternationalizedItemReaderModelContract:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        key:
+          type: string
+          nullable: true
+        entity:
+          type: string
+          nullable: true
+        imageUrl:
+          type: string
+          nullable: true
+        properties:
+          $ref: '#/components/schemas/Metadata'
+        internationalizedValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/InternationalizedValueModelContract'
+          nullable: true
+        visibility:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ReferenceItemReaderModelContract:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        key:
+          type: string
+          nullable: true
+        entity:
+          type: string
+          nullable: true
+        imageUrl:
+          type: string
+          nullable: true
+        properties:
+          $ref: '#/components/schemas/Metadata'
+        value:
+          type: string
+          nullable: true
+        language:
+          type: string
+          nullable: true
+        visibility:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ReferenceItemReaderModelContractPagedResult:
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        pageCount:
+          type: integer
+          format: int32
+        limit:
+          type: integer
+          format: int32
+        rowCount:
+          type: integer
+          format: int32
+        firstRowOnPage:
+          type: integer
+          format: int32
+          readOnly: true
+        lastRowOnPage:
+          type: integer
+          format: int32
+          readOnly: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReferenceItemReaderModelContract'
+          nullable: true
+      additionalProperties: false
+    ReferenceItemWriterModelContract:
+      required:
+        - internationalizedValues
+        - key
+      type: object
+      properties:
+        key:
+          minLength: 1
+          type: string
+        imageUrl:
+          type: string
+          nullable: true
+        properties:
+          $ref: '#/components/schemas/Metadata'
+        internationalizedValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/InternationalizedValueModelContract'
+      additionalProperties: false

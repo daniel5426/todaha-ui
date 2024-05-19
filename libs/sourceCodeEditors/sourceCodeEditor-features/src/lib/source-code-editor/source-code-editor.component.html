@@ -1,0 +1,50 @@
+<p-splitter styleClass="sourceCode-component" [panelSizes]="[30,70]">
+  <ng-template pTemplate>
+    <div class="sourceCode-explorer">
+      <p-toolbar styleClass="sourceCode-explorer-toolbox">
+        <div class="p-toolbar-group-left flex flex-wrap justify-content-center">
+          <span class="vertical-align-middle">EXPLORER</span>
+        </div>
+        <div class="p-toolbar-group-right">
+          <ul
+            class="list-none p-0 m-0 flex select-none flex-column lg:flex-row surface-border">
+            <li>
+              <a pRipple
+                class="flex px-3 p-3 align-items-center font-medium border-round cursor-pointer transition-colors transition-duration-150 hover:text-900 hover:surface-100">
+                <i class="pi pi-file text-base"></i>
+                <span class="block lg:hidden font-medium">New File</span>
+              </a>
+            </li>
+            <li>
+              <a pRipple
+                class="flex px-3 p-3 align-items-center font-medium border-round cursor-pointer transition-colors transition-duration-150 hover:text-900 hover:surface-100  ">
+                <i class="pi pi-folder text-base"></i>
+                <span class="block lg:hidden font-medium">New Folder</span>
+              </a>
+            </li>
+            <li>
+              <a pRipple
+                class="flex px-3 p-3 align-items-center font-medium border-round cursor-pointer transition-colors transition-duration-150 hover:text-900 hover:surface-100  ">
+                <i class="pi pi-times text-base"></i>
+                <span class="block lg:hidden font-medium">Remove</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </p-toolbar>
+      <div class="overflow-y-auto">
+        <lib-source-code-explorer></lib-source-code-explorer>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate>
+    <p-tabView class="sourceCode-editors">
+      <p-tabPanel *ngFor="let sourceItem of sourceItems" header=" {{sourceItem.fileName}}" class="sourceCode-editor"
+        [closable]="true">
+        <div class="overflow-y-auto">
+          <lib-source-code-editor-item [sourceItem]="sourceItem"></lib-source-code-editor-item>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </ng-template>
+</p-splitter>

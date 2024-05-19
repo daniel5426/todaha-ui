@@ -1,0 +1,11 @@
+<ul class="sourceCode-items">
+  <ng-container *ngFor="let item of items; let i = index">
+    <li lib-source-code-explorer-item
+      *ngIf="!item.separator"
+      [item]="item"
+      [index]="i"
+      [root]="true"
+    ></li>
+    <li *ngIf="item.separator" class="menu-separator"></li>
+  </ng-container>
+</ul>

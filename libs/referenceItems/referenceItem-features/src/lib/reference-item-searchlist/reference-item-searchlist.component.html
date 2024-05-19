@@ -1,0 +1,28 @@
+<p-blockUI [blocked]="loading"></p-blockUI>
+
+<p-toast></p-toast>
+<div class="grid" #main>
+  <div class="col-12">
+      <div class="card">
+          <h4>{{title | translate}}</h4>
+          <lib-reference-item-toolbar></lib-reference-item-toolbar>
+          <lib-reference-item-searchbar></lib-reference-item-searchbar>
+          <lib-reference-item-list></lib-reference-item-list>
+      </div>
+
+  </div>
+  <p-sidebar [(visible)]="visibility" position="right" styleClass="p-sidebar-lg" >
+    <ng-template pTemplate="content">
+      <lib-reference-item-detail></lib-reference-item-detail>
+    </ng-template>
+  </p-sidebar>
+</div>
+
+
+
+
+
+
+
+
+

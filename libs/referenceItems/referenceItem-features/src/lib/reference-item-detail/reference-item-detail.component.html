@@ -1,0 +1,34 @@
+
+
+<p-card styleClass="shadow-none">
+
+  <div class="col-12 lg:col-12">
+    <h6 class="text-5xl">{{title}}</h6>
+    <div  style="height:3px;background:linear-gradient(90deg, var(--primary-color) 0%, rgba(33, 150, 243, 0) 50%);"></div>
+
+    <div class="grid formgrid p-fluid my-5" >
+      <div class="field mb-4 col-12">
+        <label for="key" class="font-medium text-900">{{'KEY' | translate}}</label>
+        <input id="key" type="text" pInputText [(ngModel)]="model.key" >
+        <p-message *ngIf="submitted && !model.key">{{'REQUIRED' |translate}}</p-message>
+      </div>
+      </div>
+      <div class="grid formgrid p-fluid">
+        <div class="field mb-2 col-12">
+          <label  class="font-medium text-900">{{'LANGUAGE' | translate}}</label>
+        </div>
+      <div *ngFor="let internationalizedValue of model.internationalizedValues; index as position" class="field mb-4 col-12">
+        <p-inputGroup>
+          <p-inputGroupAddon><p-checkbox [(ngModel)]="internationalizedValue._default" [binary]="true"></p-checkbox>{{internationalizedValue.language}}</p-inputGroupAddon>
+          <input type="text" [(ngModel)]="internationalizedValue.value" pInputText placeholder="{{'VALUE' | translate}}" />
+        </p-inputGroup>
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="{{'CANCEL' | translate}}" icon="pi pi-times" class="p-button-text" (click)="cancel()"></button>
+    <button pButton pRipple label="{{'SAVE' | translate}}" icon="pi pi-check" class="p-button-text" (click)="validate()"></button>
+  </ng-template>
+</p-card>
+
+

@@ -1,0 +1,14 @@
+<p-toolbar styleClass="mb-4">
+
+  <ng-template pTemplate="left">
+    <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="export('csv')"></button>
+</ng-template>
+
+  <ng-template pTemplate="right">
+      <div class="my-2">
+          <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-outlined p-button-primary mr-2" (click)="add()"></button>
+          <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-outlined p-button-primary mr-2" (click)="delete()" ></button>
+      </div>
+  </ng-template>
+
+</p-toolbar>

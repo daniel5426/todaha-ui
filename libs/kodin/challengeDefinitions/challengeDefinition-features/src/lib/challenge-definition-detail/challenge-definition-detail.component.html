@@ -1,0 +1,179 @@
+<p-dialog [(visible)]="visibility" [modal]="true" class="p-fluid" [draggable]="false" [resizable]="false"
+          [style]="{ width: '80vw', height: '80vw' }">
+  <ng-template pTemplate="content">
+
+    <h6 class="text-5xl">{{ title }}</h6>
+    <div class="challenge-definition-detail-component-separator mb-3"></div>
+
+    <form [formGroup]="form">
+      <div class="col-12">
+        <div class="grid formgrid">
+
+          <p-floatLabel class="field col-6 mb-5">
+            <input pInputText
+                   formControlName="title"
+                   class=" form-control"
+                   [ngStyle]="{ '--surface-border': (submitted && f['title'].invalid) ? '#ea1035' : '#eae5e6' }"
+                   id="title" />
+            @if (submitted && f['title'].errors) {
+              <div class="p-error invalid-feedback">
+                @if (f['title'].errors['required']) {
+                  <div>{{ 'TITLE_IS_REQUIRED' | translate }}</div>
+                }
+                @if (f['title'].errors['minlength']) {
+                  <div>{{ 'MUST_BE_A_LEAST_6_CHARACTERS' | translate }}</div>
+                } @if (f['title'].errors['maxlength']) {
+                <div>{{ 'MUST_NOT_EXCEED_20_CHARACTERS' | translate }}</div>
+              }
+              </div>
+            }
+            <label for="title">{{ 'TITLE' | translate }}</label>
+          </p-floatLabel>
+
+          <p-floatLabel class="field col-6">
+            <p-dropdown id="programmingLanguage" [options]="levels" optionLabel="value" optionValue="id"
+                        [showClear]="true" placeholder="{{'PROGRAMMINGLANGUAGE'  |translate}}"></p-dropdown>
+            <label for="programmingLanguage">{{ 'PROGRAMMINGLANGUAGE' | translate }}</label>
+          </p-floatLabel>
+
+          <p-floatLabel class="field col-6">
+            <p-dropdown id="level"
+                        formControlName="levelId"
+                        [options]="levels" optionLabel="value"
+                        optionValue="id" [showClear]="true"
+                        [ngStyle]="{ '--surface-border': (submitted && f['levelId'].invalid) ? '#ea1035' : '#eae5e6' }"
+                        placeholder="{{'LEVEL'  |translate}}"></p-dropdown>
+            @if (submitted && f['levelId'].errors) {
+              <div class="p-error invalid-feedback">
+                @if (f['levelId'].errors['required']) {
+                  <div>{{ 'LEVEL_IS_REQUIRED' | translate }}</div>
+                }
+              </div>
+            }
+            <label for="level">{{ 'LEVEL' | translate }}</label>
+          </p-floatLabel>
+
+          <p-floatLabel class="field col-3">
+            <p-inputNumber id="score"
+                           formControlName="score"
+                           [ngStyle]="{ '--surface-border': (submitted && f['score'].invalid) ? '#ea1035' : '#eae5e6' }"
+            />
+            @if (submitted && f['score'].errors) {
+              <div class="p-error invalid-feedback">
+                @if (f['score'].errors['required']) {
+                  <div>{{ 'SCORE_IS_REQUIRED' | translate }}</div>
+                }
+                @if (f['score'].errors['minlength'] || f['score'].errors['maxlength']) {
+                  <div>{{ 'BETWEEN_1_AND_100' | translate }}</div>
+                }
+              </div>
+            }
+            <label for="score">{{ 'SCORE' | translate }}</label>
+          </p-floatLabel>
+
+          <p-floatLabel class="field col-3">
+            <p-inputGroup>
+              <p-inputGroupAddon>
+                <p-checkbox formControlName="withLimit"  [binary]="true" />
+              </p-inputGroupAddon>
+              <p-inputNumber id="timeLimit" formControlName="timeLimit" [disabled]="!f['withLimit'].value" placeholder="{{'TIME_LIMIT'  |translate}}" />
+            </p-inputGroup>
+          </p-floatLabel>
+
+          <p-floatLabel class="field col-6 mb-5">
+            <p-multiSelect [options]="skills"
+                           formControlName="skillsId" optionLabel="value" optionValue="id"
+                           [showClear]="true"
+                           [ngStyle]="{ '--surface-border': (submitted && f['skillsId'].invalid) ? '#ea1035' : '#eae5e6' }"
+                           placeholder="{{'SKILLS'  |translate}}"></p-multiSelect>
+            @if (submitted && f['skillsId'].errors) {
+              <div class="p-error invalid-feedback">
+                @if (f['skillsId'].errors['required']) {
+                  <div>{{ 'SKILLS_ARE_REQUIRED' | translate }}</div>
+                }
+                @if (f['skillsId'].errors['minlength'] || f['skillsId'].errors['maxlength']) {
+                  <div>{{ 'BETWEEN_1_AND_10' | translate }}</div>
+                }
+              </div>
+            }
+            <label for="skills">{{ 'SKILLS' | translate }}</label>
+          </p-floatLabel>
+
+          <p-floatLabel class="field col-6">
+            <p-multiSelect [options]="topics"
+                           formControlName="topicsId" optionLabel="value" optionValue="id"
+                           [showClear]="true"
+                           [ngStyle]="{ '--surface-border': (submitted && f['topicsId'].invalid) ? '#ea1035' : '#eae5e6' }"
+                           placeholder="{{'TOPICS'  |translate}}"></p-multiSelect>
+            @if (submitted && f['topicsId'].errors) {
+              <div class="p-error invalid-feedback">
+                @if (f['topicsId'].errors['required']) {
+                  <div>{{ 'TOPICS_ARE_REQUIRED' | translate }}</div>
+                }
+              </div>
+            }
+            <label for="topics">{{ 'TOPICS' | translate }}</label>
+          </p-floatLabel>
+
+          <p-floatLabel class="field col-12 mb-5">
+          <textarea id="resume" rows="4"
+                    formControlName="resume"
+                    [ngStyle]="{ '--surface-border': (submitted && f['resume'].invalid) ? '#ea1035' : '#eae5e6' }"
+                    class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                    pInputTextarea>
+              </textarea>
+            @if (submitted && f['resume'].errors) {
+              <div class="p-error invalid-feedback">
+                @if (f['resume'].errors['required']) {
+                  <div>{{ 'RESUME_IS_REQUIRED' | translate }}</div>
+                }
+              </div>
+            }
+            <label for="resume">{{ 'RESUME' | translate }}</label>
+
+          </p-floatLabel>
+
+          <p-floatLabel class="field col-12 mb-5">
+            <textarea id="instruction" rows="4"
+                      formControlName="instruction"
+                      [ngStyle]="{ '--surface-border': (submitted && f['instruction'].invalid) ? '#ea1035' : '#eae5e6' }"
+                      class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+                      pInputTextarea></textarea>
+            @if (submitted && f['instruction'].errors) {
+              <div class="p-error invalid-feedback">
+                @if (f['instruction'].errors['required']) {
+                  <div>{{ 'INSTRUCTION_IS_REQUIRED' | translate }}</div>
+                }
+              </div>
+            }
+            <label for="instruction">{{ 'INSTRUCTION' | translate }}</label>
+
+          </p-floatLabel>
+
+          <p-floatLabel class="field col-12 mb-5">
+            <p-editor formControlName="description"
+                      [ngStyle]="{ '--surface-border': (submitted && f['description'].invalid) ? '#ea1035' : '#eae5e6' }"
+                      id="description" />
+            @if (submitted && f['description'].errors) {
+              <div class="p-error invalid-feedback">
+                @if (f['description'].errors['required']) {
+                  <div>{{ 'DESCRIPTION_IS_REQUIRED' | translate }}</div>
+                }
+              </div>
+            }
+            <label for="description">{{ 'DESCRIPTION' | translate }}</label>
+          </p-floatLabel>
+
+        </div>
+
+      </div>
+
+    </form>
+
+
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="cancel()"></button>
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="validate()"></button>
+  </ng-template>
+</p-dialog>

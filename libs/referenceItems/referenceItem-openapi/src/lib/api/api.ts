@@ -1,0 +1,11 @@
+export * from './deleteEndPoint.service';
+import { DeleteEndPointService } from './deleteEndPoint.service';
+export * from './getAllEndPoint.service';
+import { GetAllEndPointService } from './getAllEndPoint.service';
+export * from './getByIdEndPoint.service';
+import { GetByIdEndPointService } from './getByIdEndPoint.service';
+export * from './postEndPoint.service';
+import { PostEndPointService } from './postEndPoint.service';
+export * from './putEndPoint.service';
+import { PutEndPointService } from './putEndPoint.service';
+export const APIS = [DeleteEndPointService, GetAllEndPointService, GetByIdEndPointService, PostEndPointService, PutEndPointService];

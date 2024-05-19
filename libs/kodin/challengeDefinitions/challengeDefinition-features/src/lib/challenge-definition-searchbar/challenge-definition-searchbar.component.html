@@ -1,0 +1,33 @@
+<div class="p-toolbar" >
+  <div class="col p-0">
+    <div  class="p-fluid p-formgrid grid p-0">
+      <div class="col-3">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input type="text" pInputText placeholder="{{ 'TITLE' | translate }}"  [(ngModel)]="query.title" (keyup.enter)="search()" />
+        </span>
+      </div>
+      <div class="col-2">
+        <p-dropdown [options]="challengeDefinitionStateModelValues" [(ngModel)]="challengeDefinitionStateModel" optionLabel="label" [showClear]="true" placeholder="{{'SELECT_CHALLENGEDEFINITION_STATE'}}"></p-dropdown>
+      </div>
+      <div class="col-2">
+        <p-dropdown [options]="levels" [(ngModel)]="challengeDefinitionStateModel" optionLabel="value" optionValue="id" [showClear]="true" placeholder="{{'SELECT_LEVEL'}}"></p-dropdown>
+      </div>
+      <div class="col-2">
+        <p-dropdown [options]="skills" [(ngModel)]="challengeDefinitionStateModel" optionLabel="value" optionValue="id" [showClear]="true" placeholder="{{'SELECT_SKILLS'}}"></p-dropdown>
+      </div>
+    </div>
+  </div>
+  <div class="col-fixed p-0" style="width:150px">
+    <div  class="p-fluid p-formgrid grid p-0">
+      <div class=" col-12">
+        <span class="p-buttonset">
+          <button (click)="search()" pButton pRipple type="button" icon="pi pi-search" class="p-mr-2"></button>
+          <button (click)="clear()" pButton pRipple type="button"  icon="pi pi-refresh"class="p-mr-2"></button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+

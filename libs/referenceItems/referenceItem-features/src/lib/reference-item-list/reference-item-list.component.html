@@ -1,0 +1,58 @@
+<p-table [value]="items"
+  [lazy]=true
+  [rowHover]="true"
+  [filterDelay]="0"
+  scrollDirection="both"
+  [scrollable]="true" scrollHeight="400px"
+  (onLazyLoad)="sort($event)"
+  [customSort]="true"
+  styleClass="mt-3"
+  responsiveLayout="scroll"
+  [selectionPageOnly]="true"
+  dataKey="id">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 4rem">
+        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+      </th>
+      <th pSortableColumn="referenceItem.Key" style="width:200px"  >
+        <div class="p-d-flex p-jc-between p-ai-center">
+          {{'KEY'|translate}}
+            <p-sortIcon field="referenceItem.key"></p-sortIcon>
+        </div>
+    </th>
+    <th >
+      <div class="p-d-flex p-jc-between p-ai-center">
+        {{'VISIBILITY'|translate}}
+      </div>
+    </th>
+
+  <th pSortableColumn="internationalizedValue.value">
+    <div class="p-d-flex p-jc-between p-ai-center">
+        {{'VALUE'|translate}}
+        <p-sortIcon field="internationalizedValue.value"></p-sortIcon>
+    </div>
+  </th>
+  <th ></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item>
+    <tr>
+      <td style="width: 4rem">
+        <p-tableCheckbox [value]="item"></p-tableCheckbox>
+      </td>
+      <td style="width:200px" pFrozenColumn class="font-bold">{{item.key}}</td>
+      <td style="width:200px">
+        <p-tag severity="{{severity(item.visibility)}}" value="{{item.visibility}}"></p-tag>
+      </td>
+      <td style="width:200px"  class="font-bold" alignFrozen="right">{{item.value}}</td>
+      <td style="width:200px" alignFrozen="right">
+        <p-splitButton icon="pi pi-align-justify"  pRipple   styleClass="p-button-secondary p-button-sm mr-2 mb-2" (onDropdownClick)="activeRow = item" [model]="actionItems[item.id]"></p-splitButton>
+      </td>
+
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="limit" [totalRecords]="total" [rowsPerPageOptions]="[5, 20, 50]"></p-paginator>
+  </ng-template>ng-template>
+</p-table>

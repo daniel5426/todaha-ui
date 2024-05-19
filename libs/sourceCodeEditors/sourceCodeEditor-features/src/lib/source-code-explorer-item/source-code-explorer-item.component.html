@@ -1,0 +1,61 @@
+<ng-container>
+
+  <div
+    *ngIf="root && item.visible !== false"
+    class="sourceCode-root-item-text"
+  >
+    {{ item.label }}
+  </div>
+
+  <a
+    *ngIf="(!item.routerLink || item.items) && item.visible !== false"
+    [attr.href]="item.url"
+    (click)="itemClick($event)"
+    [ngClass]="item.class"
+    [attr.target]="item.target"
+    tabindex="0"
+    pRipple
+    [pTooltip]="item.label"
+    [tooltipDisabled]="!active"
+  >
+    <i [ngClass]="item.icon" class="sourceCode-item-icon"></i>
+    <span class="sourceCode-item-text">{{ item.label }}</span>
+    <i
+      class="pi pi-fw pi-angle-down sourceCode-subitem-toggler" *ngIf="item.items">
+    </i>
+  </a>
+  <a
+    *ngIf="item.routerLink && !item.items && item.visible !== false"
+    (click)="itemClick($event)"
+    [ngClass]="item.class"
+    [attr.target]="item.target"
+    tabindex="0"
+    pRipple
+    [pTooltip]="item.label"
+    [tooltipDisabled]="!root"
+  >
+    <i [ngClass]="item.icon" class="sourceCode-item-icon"></i>
+    <span class="sourceCode-item-text">{{ item.label }}</span>
+    <i
+      class="pi pi-fw pi-angle-down sourceCode-subitem-toggler" *ngIf="item.items">
+    </i>
+  </a>
+
+
+  <ul
+    #subitem
+    *ngIf="item.items && item.visible !== false"
+    [@children]="subItemAnimation"
+
+  >
+    <ng-template ngFor let-child let-i="index" [ngForOf]="item.items">
+      <li
+        lib-source-code-explorer-item
+        [item]="child"
+        [index]="i"
+        [parentKey]="key"
+        [class]="child.badgeStyleClass"
+      ></li>
+    </ng-template>
+  </ul>
+</ng-container>
